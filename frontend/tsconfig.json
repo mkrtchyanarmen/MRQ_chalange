@@ -16,8 +16,10 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
+      //Would specify paths seperatly as they are not to much and should be much beautiful
+      //ex. "@components/*": [".src/components/*"],
       "@/*": ["./src/*"]
-    },
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

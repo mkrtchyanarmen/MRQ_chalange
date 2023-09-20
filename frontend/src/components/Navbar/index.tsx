@@ -1,18 +1,40 @@
-import { NavLink } from 'react-router-dom';
-import './navbar.css';
+import { NavLink } from "react-router-dom";
+import "./navbar.css";
+import { FC } from "react";
+
+type NavbarItemProps = {
+  path: string;
+  title: string;
+};
+
+const NavbarItem: FC<NavbarItemProps> = ({ path, title }) => {
+  return (
+    <li>
+      <NavLink
+        to={path}
+        className={({ isActive }) =>
+          isActive ? "navbar__link navbar__activeLink" : "navbar__link"
+        }
+      >
+        {title}
+      </NavLink>
+    </li>
+  );
+};
+
+const pages = {
+  "/": "Dashboard",
+  "/profile": "Profile",
+  "/statements": "Statements",
+};
+
 const Navbar = () => {
   return (
     <nav>
-      <ul>
-        <li>
-          <NavLink to="/">Dashboard</NavLink>
-        </li>
-        <li>
-          <NavLink to="/profile">Profile</NavLink>
-        </li>
-        <li>
-          <NavLink to="/statements">Statements</NavLink>
-        </li>
+      <ul className="navbar">
+        {Object.entries(pages).map(([path, title], index) => (
+          <NavbarItem {...{ path, title }} key={index} />
+        ))}
       </ul>
     </nav>
   );

@@ -1,3 +1,26 @@
-nav {
-  background: white;
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--colorDark);
+  border-radius: 4px;
+  list-style: none;
+}
+
+.navbar__link {
+  color: var(--colorSecondary);
+  list-style: none;
+  padding: 4px 8px;
+  &:hover {
+    color: var(--colorPrimary);
+  }
+}
+.navbar__activeLink {
+  color: var(--colorDark);
+  padding: 6px 8px;
+  background-color: var(--colorPrimary);
+  border-radius: 4px;
+  &:hover {
+    color: var(--colorDark);
+  }
 }
