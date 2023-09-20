@@ -12,9 +12,15 @@ type SymbolCardProps = {
   id: string;
   onClick: (symbolId: string) => void;
   price?: number;
+  activeSymbol: null | string;
 };
 
-const SymbolCard: FC<SymbolCardProps> = ({ id, onClick, price }) => {
+const SymbolCard: FC<SymbolCardProps> = ({
+  id,
+  onClick,
+  price,
+  activeSymbol,
+}) => {
   // Prev price to compare with changed one to see if the progress is positive or negative
   const [prevPrice, setPrevPrice] = useState(price);
 
@@ -34,32 +40,45 @@ const SymbolCard: FC<SymbolCardProps> = ({ id, onClick, price }) => {
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
-    //Shake needs to happen only when the price is changed, when the prevPrice is null no need to shake
-    if (prevPrice && price) {
-      const shadowClassName =
-        prevPrice > price
-          ? "symbolCard__negativeShadow"
-          : "symbolCard__positiveShadow";
-      ref.current?.classList.add("symbolCard__shake", shadowClassName);
+    // if any symbol is selected the all animations should be stopped
+    if (!activeSymbol) {
+      // Shake needs to happen only when the price is changed, when the prevPrice is null no need to shake
+      if (prevPrice && price && prevPrice !== price) {
+        const shadowClassName =
+          prevPrice > price
+            ? "symbolCard__negativeShadow"
+            : "symbolCard__positiveShadow";
+        ref.current?.classList.add("symbolCard__shake", shadowClassName);
 
-      // Remove the className when animation is ended
-      timeout = setTimeout(() => {
-        ref.current?.classList.remove(
-          "symbolCard__shake",
-          "symbolCard__negativeShadow",
-          "symbolCard__positiveShadow"
-        );
-      }, 620);
+        // Remove the className when animation is ended
+        timeout = setTimeout(() => {
+          ref.current?.classList.remove(
+            "symbolCard__shake",
+            "symbolCard__negativeShadow",
+            "symbolCard__positiveShadow"
+          );
+        }, 620);
+      }
+      setPrevPrice(price);
+    } else {
+      ref.current?.classList.remove(
+        "symbolCard__shake",
+        "symbolCard__negativeShadow",
+        "symbolCard__positiveShadow"
+      );
     }
-    setPrevPrice(price);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [price]);
+  }, [price, activeSymbol]);
 
   return (
-    <div ref={ref} onClick={handleOnClick} className="symbolCard">
+    <div
+      ref={ref}
+      onClick={handleOnClick}
+      className={`symbolCard ${activeSymbol === id ? "activeSymbolCard" : ""}`}
+    >
       <SymbolCardHeader {...{ id, trend }} />
       <ul className="symbolCard__info">
         <li className="symbolCard__info__item">

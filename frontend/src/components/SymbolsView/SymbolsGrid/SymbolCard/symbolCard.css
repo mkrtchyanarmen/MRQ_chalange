@@ -1,6 +1,11 @@
 .symbolCard {
   border-radius: 4px;
   background-color: var(--colorWhite);
+  cursor: pointer;
+}
+.activeSymbolCard {
+  box-shadow: var(--colorDark) 0px 2px 14px 0px;
+  transform: scale(1.05);
 }
 
 .symbolCard__header {

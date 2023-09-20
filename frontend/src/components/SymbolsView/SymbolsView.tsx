@@ -13,7 +13,10 @@ const SymbolsView = () => {
     <div>
       <div className="symbolsView">
         <div className="symbolsView__cards">
-          <SymbolsGrid onSymbolClick={handleSymbolClick} />
+          <SymbolsGrid
+            onSymbolClick={handleSymbolClick}
+            activeSymbol={activeSymbol}
+          />
         </div>
         <div className="symbolsView__chart">
           <h3>PRICE HISTORY</h3>
