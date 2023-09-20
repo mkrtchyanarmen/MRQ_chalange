@@ -15,6 +15,8 @@
   --colorSecondary: #f2f3f3;
   --colorDark: #0e1120;
   --colorWhite: #fdfdfd;
+  --colorPositive: #a0e22d;
+  --colorNegative: #ff4d55;
 
   color: var(--colorDark);
 }

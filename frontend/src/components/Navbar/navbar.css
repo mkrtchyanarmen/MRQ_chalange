@@ -1,3 +1,6 @@
+nav {
+  margin-bottom: 64px;
+}
 .navbar {
   display: flex;
   align-items: center;
