@@ -1,1 +1,4 @@
 1. Add linting command
+2. User svgr default export and have global type for svg elements in vite-env.txt(Have a look in vite-env.ts)
+3. Change component structure, the common components to be in the components folder others near to the components or page that being used
+4. Remove pages from components folder, create page folder and have all the pages there.

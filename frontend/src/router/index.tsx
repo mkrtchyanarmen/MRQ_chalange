@@ -10,6 +10,7 @@ const Router = () => {
   return (
     <Suspense
       fallback={
+        // TODO: remove inline styles
         <div style={{ minHeight: "50px", display: "flex" }}>
           <Loading />
         </div>
