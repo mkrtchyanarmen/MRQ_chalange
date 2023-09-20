@@ -1,9 +1,13 @@
-import { useCallback } from "react";
-import "./symbolCard.css";
-import { ReactComponent as IndustryLogo } from "@/assets/industry.svg";
-import { ReactComponent as CompanyIcon } from "@/assets/company.svg";
-import { ReactComponent as MarketCapIcon } from "@/assets/market_cap.svg";
+import { FC, useCallback } from "react";
+
 import { useAppSelector } from "@/hooks/redux";
+
+import SymbolCardHeader from "./SymbolCardHeader";
+import SymbolCardBaseInfo from "./SymbolCardBaseInfo";
+
+import { roundNumber } from "./utils";
+
+import "./symbolCard.css";
 
 type SymbolCardProps = {
   id: string;
@@ -11,24 +15,29 @@ type SymbolCardProps = {
   price: number;
 };
 
-const SymbolCard = ({ id, onClick, price }: SymbolCardProps) => {
-  const { trend, industry, companyName, marketCap } = useAppSelector(
-    (state) => state.stocks.entities[id]
-  );
+const SymbolCard: FC<SymbolCardProps> = ({ id, onClick, price }) => {
+  const {
+    trend,
+    industry,
+    companyName: name,
+    marketCap,
+  } = useAppSelector((state) => state.stocks.entities[id]);
   const handleOnClick = useCallback(() => {
     onClick(id);
   }, [id]);
 
   return (
     <div onClick={handleOnClick} className="symbolCard">
-      <div>
-        {id} - {trend}
-      </div>
-      <div>Price:</div>
-      <div>{price || 0} </div>
-      <CompanyIcon /> <div>{companyName}</div>
-      <IndustryLogo /> <div>{industry}</div>
-      <MarketCapIcon /> <div>{marketCap}</div>
+      <SymbolCardHeader {...{ id, trend }} />
+      <ul className="symbolCard__info">
+        <li className="symbolCard__info__item">
+          <p>Price:</p>
+          <p className="symbolCard__info__item_price">
+            {price ? `$ ${roundNumber(price, 1)}` : "--"}
+          </p>
+        </li>
+        <SymbolCardBaseInfo {...{ name, industry, marketCap }} />
+      </ul>
     </div>
   );
 };

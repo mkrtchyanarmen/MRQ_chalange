@@ -1,7 +1,50 @@
 .symbolCard {
-  border: 2px solid black; /* just for visibility, feel free to remove it */
-  margin: 10px; /* just for visibility, feel free to remove it */
-  padding: 10px; /* just for visibility, feel free to remove it */
+  border-radius: 4px;
+  background-color: var(--colorWhite);
+}
+
+.symbolCard__header {
+  background-color: var(--colorDark);
+  padding: 4px 8px;
+  position: relative;
+  border-radius: 4px 4px 0 0;
+}
+.symbolCard__header > p {
+  color: var(--colorWhite);
+  font-weight: 500;
+}
+
+.symbolCard__header__trend {
+  position: absolute;
+  top: -12px;
+  right: -24px;
+  width: 48px;
+}
+
+.symbolCard__info {
+  padding: 4px 16px;
+  & > li {
+    margin-bottom: 8px;
+  }
+}
+
+.symbolCard__info__item {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  & > svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.symbolCard__info__item:nth-child(1) {
+  align-items: end;
+}
+
+.symbolCard__info__item_price {
+  font-size: 32px;
+  font-weight: 700;
 }
 
 .symbolCard__shake {

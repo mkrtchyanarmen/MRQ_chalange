@@ -1,3 +1,10 @@
+.symbolsView {
+  display: flex;
+}
+
+.symbolsView__cards {
+  flex-grow: 1;
+}
 .symbolsView__chart {
   padding: 12px;
 }
