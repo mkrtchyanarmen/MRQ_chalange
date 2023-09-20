@@ -3,3 +3,11 @@
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 32px;
 }
+
+.symbolsGrid_loadingWrapper {
+  width: 100%;
+  padding-top: 256px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
